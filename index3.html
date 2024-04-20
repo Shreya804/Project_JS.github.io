@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            height: 100vh;
+            width: 100%;
+            background-color:plum;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            height: 60vh;
+            width: 550px;
+            background-color: black;
+            border: 2px solidplum;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px 5px rgb(100, 26, 100);
+        }
+
+        .box #disp {
+            height: 10vh;
+            width: 100%;
+            color: white;
+            text-align: center;
+            font-size: 40px;
+            line-height: 10vh;
+        }
+
+        .box form {
+            height: 35vh;
+            width: 100%;
+            background-color: #fff;
+            line-height: 45vh;
+            text-align: center;
+        }
+
+        .box form input {
+            width: 130px;
+            border: none;
+            outline: none;
+            border-bottom: 3px solid black;
+            color: black;
+            background-color: transparent;
+            font-size: 50px;
+            text-align: center;
+        }
+
+        .box form input::placeholder {
+            font-size: 20px;
+            color: black;
+            font-size: 700;
+            opacity: 0.5;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .box .btn {
+            height: 15vh;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+        }
+
+        .box .btn button {
+            padding: 5px 10px;
+            font-size: 25px;
+            background-color: #292828;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+
+        .box .btn button:hover {
+            background-color:plum;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div id="disp">Timer</div>
+        <form action="#">
+            <input type="number" id="hour" placeholder="Hour" autocomplete="off" value="">
+            <input type="number" id="minute" placeholder="Minute" autocomplete="off" value="">
+            <input type="number" id="second" placeholder="Second" autocomplete="off" value="">
+        </form>
+        <div class="btn">
+            <button id="start">START</button>
+            <button id="reset">RESET</button>
+        </div>
+
+
+    </div>
+    <script>
+        const hour = document.getElementById('hour');
+        const minute = document.getElementById('minute');
+        const second = document.getElementById('second');
+
+        const start = document.getElementById('start');
+        const reset = document.getElementById('reset');
+
+        const disp = document.getElementById('disp');
+
+        var interval = null;
+        var total = 0;
+
+        totalValue = ()=>{
+            total = Number(hour.value) * 3600 + Number(minute.value) * 60 + Number(second.value);
+        }
+
+        Timer = ()=>{
+            totalValue();
+            total--;
+
+            if (total >= 0) {
+                var hr = Math.floor(total / 3600);
+                var mt = Math.floor((total / 60) - (hr*60));
+                var sc = total - ((hr*3600) + (mt*60));
+
+
+                hour.value = hr;
+                minute.value = mt;
+                second.value = sc;
+
+            }
+            else {
+                disp.innerText = "Timer Over!!";
+            }
+        }
+
+        start.addEventListener('click', ()=>{
+            clearInterval(interval);
+            interval = setInterval(Timer, 1000);
+            disp.innerText = "Timer Started";
+            
+
+        });
+        reset.addEventListener('click', ()=>{
+            clearInterval(interval);
+
+            hour.value = hour;
+            minute.value = minute;
+            second.value = second;
+            disp.innerText = "Timer Reset";
+         
+        });
+
+    </script>
+
+</body>
+
+</html>

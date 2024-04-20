@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BMI Calculator</title>
+	<style>
+		#rgmodal {
+		   display: flex;
+		   align-items: center;
+		   margin-top: 10%;
+		}
+		#card {
+			background-color: black;
+		}
+		#label {
+			color: #fff;
+		}
+		.card-header {
+			color:white;
+		}
+		#info {
+			color: #fff;
+		}
+		#btn {
+			border: none;
+			color: #fff;
+			background-color:#5c8a8a;
+			cursor:pointer;
+			padding: 8px;
+		}
+		#result {
+			color: #fff;
+		}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	
+	
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 mx-auto" id="rgmodal">
+				<div class="card" id="card">
+					<div class="card-header">
+						<h4> BMI CALCULATOR </h4>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+						<label  id="label">Weight</label>
+						<input type="number" id="weight" placeholder="weight(kg)">
+						</div>
+						<div class="form-group">
+						<label  id="label">Height</label>
+						<input type="number" id="feet" placeholder="height(feet)">
+						</div>
+						<div class="form-group">
+						<label  id="label">Height</label>
+						<input type="number" id="inches" placeholder="height(inches)">
+						<p id="result"></p>
+						</div>
+						</div>
+						<div class="card-footer">
+							<button id="btn" onclick="calculateBMI()">Calculate BMI</button>
+							</div>
+							</div>
+							</div>
+							
+							</div>
+							</div>
+							
+						
+							<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+							<script>
+								function calculateBMI() {
+									var weight = parseFloat(document.getElementById('weight').value);
+									var feet = parseFloat(document.getElementById('feet').value);
+									var inches = parseFloat(document.getElementById('inches').value);
+
+									if (isNaN(weight) || isNaN(feet) || isNaN(inches) || weight <= 0 || feet <= 0 || inches < 0 || inches >= 12) {
+										document.getElementById('result').innerHTML = "Please enter valid values.";
+										return;
+									}
+
+									var heightInInches = (feet * 12) + inches;
+									var heightInMeters = heightInInches * 0.0254;
+
+									var bmi = weight / (heightInMeters * heightInMeters);
+									document.getElementById('result').innerHTML = "Your BMI is: " + bmi.toFixed(2);
+								}
+							</script>
+</body>
+
+</html>
